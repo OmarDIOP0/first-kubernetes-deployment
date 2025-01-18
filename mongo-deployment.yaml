@@ -17,10 +17,15 @@ spec:
         image: mongo
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
-          value:
-        -name: MONGO_INITDB_ROOT_PASSWORD
-          value:
-
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-root-username
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-root-password
         resources:
           limits:
             memory: "128Mi"
